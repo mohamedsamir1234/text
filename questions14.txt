@@ -1,0 +1,192 @@
+1* Write an SQL query to find the position of the alphabet (‘a’) in the Firstname column ‘Ahmed’ from patients table.?
+
+Select INSTR(FIRST_NAME, BINARY'a') from patients where FIRST_NAME = 'Ahmed';
+
+2* Write an SQL query to print the First_Name from patients table after removing white spaces from the right side.?
+
+Select RTRIM(First_Name) from patients;
+ 
+3* Write an SQL query that fetches the unique values of Salary from Doctors table and prints its length?
+
+Select distinct length(Salary ) from Doctors;
+ 
+4* Write an SQL query to print the First_Name Patients table after replacing ‘a’ with ‘A’?
+
+Select REPLACE(First_Name,'a','A') from Patients;
+ 
+5*Write an SQL query to print the First_Name and LAST_NAME from Patients table into a single column COMPLETE_NAME. A space char should separate them?
+
+Select CONCAT(First_Name, ' ', Last_Name) AS 'COMPLETE_NAME' from Patients;
+
+6* Write an SQL query to show only even rows from a table.??
+
+SELECT * FROM Doctors WHERE MOD (Doctor_ID, 2) = 0;
+ 
+7* Write an SQL query to clone a new table from another table.?
+
+SELECT * INTO DoctorClone FROM Doctors;
+SELECT * INTO DoctorClone FROM Doctors WHERE 1 = 0;
+CREATE TABLE DoctorClone LIKE Doctors;
+
+8* Write an SQL query to fetch intersecting records of two tables?
+
+(SELECT * FROM Medicines)
+INTERSECT
+(SELECT * FROM MedicineClone);
+ 
+9*  Write an SQL query to show the second highest Price from a table.?
+
+Select max(Salary) from Doctors 
+where Price not in (Select max(Price) from Medicines);
+ 
+10* Write an SQL query to show only odd rows from a table.??
+
+SELECT * FROM Doctors WHERE MOD (Doctor_ID, 2) <> 0;
+
+11* Write an SQL query to show only even rows from a table.??
+
+SELECT * FROM Doctors WHERE MOD (Doctor_ID, 2) = 0;
+ 
+12* Write an SQL query to clone a new table from another table.?
+
+SELECT * INTO DoctorClone FROM Doctors;
+SELECT * INTO DoctorClone FROM Doctors WHERE 1 = 0;
+CREATE TABLE DoctorClone LIKE Doctors;
+
+13* Write an SQL query to fetch intersecting records of two tables?
+
+(SELECT * FROM Doctors)
+INTERSECT
+(SELECT * FROM DoctorClone);
+
+14* Write an SQL query to print details for Patient with the first name as “Vipul” and “Satish” from Doctors table.?
+
+Select * from Doctors where First_Name in ('Vipul','Satish');
+ 
+16* Write an SQL query to fetch the last five records from a table?
+
+SELECT * FROM Patients WHERE Patient_ID <=5
+UNION
+SELECT * FROM (SELECT * FROM Patient W order by W.Patient_ID DESC) AS W1 WHERE W1.Patient_ID <=5;
+
+17* Write an SQL query to fetch three max salaries from a table.?
+
+SELECT distinct Price from Medicines a WHERE 3 >= (SELECT count(distinct Price) from Medicines b WHERE a.Salary <= b.Salary) order by a.Price desc;
+ 
+18* Write an SQL query to fetch the names of Medicines who earn the highest Price.
+
+SELECT Medicin_NAME, SALARY from Medicines WHERE Price=(SELECT max(Price) from Medicines);
+
+19*Write an SQL query to fetch intersecting records of two tables?
+
+(SELECT * FROM Medicines)
+INTERSECT
+(SELECT * FROM MedicineClone);
+ 
+20* Write an SQL query to show the top n (say 10) records of a table.?
+
+SELECT * FROM Doctors  ORDER BY Salary DESC LIMIT 10;
+
+SELECT TOP 10 * FROM Doctors ORDER BY Price DESC;
+
+SELECT * FROM (SELECT * FROM Doctors ORDER BY Salary DESC)
+WHERE ROWNUM <= 10;
+
+
+
+
+
+
+select statments
+
+-- 5 insert statment
+
+INSERT INTO Patients VALUES
+(1,'Lotfy ','shawky',12,'O+'),
+(2,'Saad','fathy',19,'A-'),
+(3,'Tarek','omar',45,'B');
+INSERT INTO Doctors VALUES
+(1,'ahmed','mohamed',General,52212),
+(2,'islam',ali,Hart,365472);
+
+
+
+
+
+
+-- 3 select using subquery
+
+
+SELECT * 
+   FROM Patients 
+   WHERE PatientID IN (SELECT PatientID
+         FROM Patients 
+         WHERE PatientID = 1) ;
+
+SELECT * 
+   FROM Doctors 
+   WHERE Doctor_ID IN (SELECT Doctor_ID
+         FROM Doctors 
+         WHERE Doctor_ID = 1) ;
+
+SELECT * 
+   FROM Departments 
+   WHERE Department_ID IN (SELECT Department_ID
+         FROM Departments 
+         WHERE Department_ID = 'revoo') ;
+
+
+
+
+
+
+
+-- 2 select statments using count and group functions
+
+SELECT Department_ID, COUNT(*)  'count'
+FROM Departments 
+GROUP BY Department_ID;
+
+SELECT Age, COUNT(*) 'count'
+FROM Patients 
+GROUP BY Patients;
+
+
+
+
+
+
+-- 5 update statments
+
+UPDATE Doctors
+SET First_Name = 'reno'
+WHERE Doctor_ID = 1;
+
+UPDATE Doctors
+SET Last_Name = 'kinakom'
+WHERE Doctor_ID = 2;
+
+UPDATE Doctors
+SET Salary = 27700
+WHERE Doctor_ID = 3;
+
+UPDATE Patients
+SET Firstname = 'Naguib'
+WHERE Patient_ID = 1;
+
+UPDATE Patients
+SET Lastname = 'Mafouz' 
+WHERE Patient_ID = 2;
+
+
+
+
+
+-- 5 delete statments
+
+DELETE FROM Patients WHERE Patient_ID= 1;
+DELETE FROM Patients WHERE Patient_ID= 2;
+DELETE FROM Patients WHERE Patient_ID= 3;
+DELETE FROM Doctors WHERE Doctor_ID= 1;
+DELETE FROM Doctors WHERE Doctor_ID= 1;
+
