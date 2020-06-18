@@ -1,0 +1,43 @@
+CREATE TABLE [Hospital] (
+  [Hospital_ID] INT NOT NULL,
+  [Name] VARCHAR(50),
+  [Place] VARCHAR(50),
+  PRIMARY KEY ([Hospital_ID])
+);
+
+CREATE TABLE [Patients] (
+  [Patient_ID] INT NOT NULL,
+  [First_Name] VARCHAR(50),
+  [Last_Name] VARCHAR(50),
+  [Age] INT NOT NULL,
+  [Biood_Type] VARCHAR(2),
+  PRIMARY KEY ([Patient_ID])
+);
+
+CREATE TABLE [Check_up] (
+  [Check_ID] INT NOT NULL,
+  [Patient_ID] INT NOT NULL,
+  [Department] VARCHAR(50),
+  [Doctor_ID] INT NOT NULL,
+  [Date] DATE NOT NULL,
+  PRIMARY KEY ([Check_ID])
+);
+
+CREATE INDEX [FK] ON  [Check_up] ([Patient_ID], [Department], [Doctor_ID]);
+
+CREATE TABLE [Departments] (
+  [Department_ID] INT NOT NULL,
+  [Doctor_ID] INT NOT NULL,
+  PRIMARY KEY ([Department_ID])
+);
+
+CREATE INDEX [FK] ON  [Departments] ([Doctor_ID]);
+
+CREATE TABLE [Doctors] (
+  [Doctor_ID] INT NOT NULL,
+  [First_Name] VARCHAR(50),
+  [Last_Name] VARCHAR(50),
+  [Specialization] VARCHAR(50),
+  [Salary] INT NOT NULL,
+  PRIMARY KEY ([Doctor_ID])
+);
